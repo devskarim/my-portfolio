@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Login</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+	<div class="login-container">
+		<div class="login-card">
+			<div class="login-header">
+				<h2>Admin Panel</h2>
+				<p>Portfolio boshqaruvi uchun kirish</p>
+			</div>
+
+			{% if error %}
+			<div class="error-message">
+				{{ error }}
+			</div>
+			{% endif %}
+
+			<form method="POST" class="login-form">
+				<div class="form-group">
+					<label for="username">Foydalanuvchi nomi</label>
+					<input type="text" id="username" name="username" required>
+				</div>
+
+				<div class="form-group">
+					<label for="password">Parol</label>
+					<input type="password" id="password" name="password" required>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Kirish</button>
+			</form>
+
+			<div class="login-footer">
+				<a href="/" class="back-link">
+					<i class="fas fa-arrow-left"></i>
+					Bosh sahifaga qaytish
+				</a>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

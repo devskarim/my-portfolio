@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Backend Developer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader">
+            <div class="cube">
+                <div class="face front"></div>
+                <div class="face back"></div>
+                <div class="face right"></div>
+                <div class="face left"></div>
+                <div class="face top"></div>
+                <div class="face bottom"></div>
+            </div>
+        </div>
+        <p>Yuklanmoqda...</p>
+    </div>
+
+    <!-- 3D Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Portfolio</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Bosh sahifa</a></li>
+                <li><a href="#about" class="nav-link">Haqida</a></li>
+                <li><a href="#experience" class="nav-link">Tajriba</a></li>
+                <li><a href="#projects" class="nav-link">Loyihalar</a></li>
+                <li><a href="#skills" class="nav-link">Ko'nikmalar</a></li>
+                <li><a href="#contact" class="nav-link">Aloqa</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Backend Developer</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="typing-text"></span>
+                </p>
+                <p class="hero-description">
+                    Professional backend dasturchi bo'lib, kuchli va kengaytirilishi mumkin bo'lgan tizimlar yarataman.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">Loyihalarim</a>
+                    <a href="#contact" class="btn btn-secondary">Aloqa</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-elements">
+                    <div class="floating-card" data-speed="0.5">
+                        <i class="fas fa-code"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="floating-card" data-speed="0.3">
+                        <i class="fas fa-database"></i>
+                        <span>SQL</span>
+                    </div>
+                    <div class="floating-card" data-speed="0.7">
+                        <i class="fab fa-docker"></i>
+                        <span>Docker</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Haqida</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Backend Dasturchi</h3>
+                    <p>
+                        Men 5+ yillik tajribaga ega backend dasturchiman. Python, Django, Flask, FastAPI kabi
+                        texnologiyalarda kuchli ko'nikmalarga egaman. Mikroservislar, REST API, ma'lumotlar bazasi
+                        dizayni va DevOps amaliyotlarida tajribam bor.
+                    </p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="50">0</span>
+                            <span class="stat-label">Loyiha</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="5">0</span>
+                            <span class="stat-label">Yil Tajriba</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="100">0</span>
+                            <span class="stat-label">% Muvaffaqiyat</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="code-editor">
+                        <div class="editor-header">
+                            <div class="editor-buttons">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="editor-title">app.py</div>
+                        </div>
+                        <div class="editor-content">
+                            <pre><code>from flask import Flask
+from sqlalchemy import create_engine
+
+app = Flask(__name__)
+
+@app.route('/api/data')
+def get_data():
+    return {'status': 'success'}
+
+if __name__ == '__main__':
+    app.run()</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Tajriba</h2>
+            <div class="timeline">
+                {% for experience in experiences %}
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>{{ experience.title }}</h3>
+                            <span class="company">{{ experience.company }}</span>
+                        </div>
+                        <div class="timeline-date">
+                            {{ experience.start_date }} -
+                            {% if experience.current %}Hozirgacha{% else %}{{ experience.end_date }}{% endif %}
+                        </div>
+                        <p>{{ experience.description }}</p>
+                        {% if experience.technologies_used %}
+                        <div class="technologies">
+                            {% for tech in experience.technologies_used.split(',') %}
+                            <span class="tech-tag">{{ tech.strip() }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Loyihalar</h2>
+            <div class="projects-grid">
+                {% for project in projects %}
+                <div class="project-card" data-tilt>
+                    <div class="project-image">
+                        <img src="{{ project.image_url }}" alt="{{ project.title }}">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                {% if project.github_url %}
+                                <a href="{{ project.github_url }}" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                {% endif %}
+                                {% if project.live_url %}
+                                <a href="{{ project.live_url }}" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>{{ project.title }}</h3>
+                        <p>{{ project.description }}</p>
+                        {% if project.technologies %}
+                        <div class="project-tech">
+                            {% for tech in project.technologies.split(',') %}
+                            <span class="tech-tag">{{ tech.strip() }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Ko'nikmalar</h2>
+            <div class="skills-grid">
+                {% for skill in skills %}
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="{{ skill.icon }}"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h3>{{ skill.name }}</h3>
+                        <div class="skill-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-progress="{{ skill.proficiency }}"></div>
+                            </div>
+                            <span class="progress-text">{{ skill.proficiency }}%</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Aloqa</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Bog'lanish</h3>
+                    <p>Loyiha yoki hamkorlik bo'yicha gaplashishni xohlaysizmi? Men siz bilan bog'lanishga tayyorman.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>email@example.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+998 90 123 45 67</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Toshkent, O'zbekiston</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Ismingiz" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="Mavzu" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Xabar" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Yuborish</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span class="notification-message"></span>
+        <button class="notification-close">&times;</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/three.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/gsap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ScrollTrigger.min.js') }}"></script> 
+    <script src="../static/js/main.js"></script>
+</body>
+
+</html>

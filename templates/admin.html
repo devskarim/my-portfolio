@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Panel</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+	<div class="admin-container">
+		<header class="admin-header">
+			<h1>Admin Panel</h1>
+			<div class="admin-actions">
+				<a href="/" class="btn btn-secondary">Bosh sahifa</a>
+				<a href="/admin/logout" class="btn btn-danger">Chiqish</a>
+			</div>
+		</header>
+
+		<div class="admin-content">
+			<!-- Contacts Section -->
+			<section class="admin-section">
+				<h2>Xabarlar</h2>
+				<div class="table-container">
+					<table class="admin-table">
+						<thead>
+							<tr>
+								<th>Ism</th>
+								<th>Email</th>
+								<th>Mavzu</th>
+								<th>Xabar</th>
+								<th>Sana</th>
+								<th>O'qilgan</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for contact in contacts %}
+							<tr>
+								<td>{{ contact.name }}</td>
+								<td>{{ contact.email }}</td>
+								<td>{{ contact.subject }}</td>
+								<td>{{ contact.message[:50] }}...</td>
+								<td>{{ contact.created_at }}</td>
+								<td>
+									{% if contact.read %}
+									<span class="badge badge-success">Ha</span>
+									{% else %}
+									<span class="badge badge-warning">Yo'q</span>
+									{% endif %}
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<!-- Projects Section -->
+			<section class="admin-section">
+				<h2>Loyihalar</h2>
+				<div class="table-container">
+					<table class="admin-table">
+						<thead>
+							<tr>
+								<th>Nomi</th>
+								<th>Tavsif</th>
+								<th>Kategoriya</th>
+								<th>Texnologiyalar</th>
+								<th>Featured</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for project in projects %}
+							<tr>
+								<td>{{ project.title }}</td>
+								<td>{{ project.description[:50] }}...</td>
+								<td>{{ project.category }}</td>
+								<td>{{ project.technologies[:30] }}...</td>
+								<td>
+									{% if project.featured %}
+									<span class="badge badge-success">Ha</span>
+									{% else %}
+									<span class="badge badge-secondary">Yo'q</span>
+									{% endif %}
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<!-- Skills Section -->
+			<section class="admin-section">
+				<h2>Ko'nikmalar</h2>
+				<div class="table-container">
+					<table class="admin-table">
+						<thead>
+							<tr>
+								<th>Nomi</th>
+								<th>Kategoriya</th>
+								<th>Daraja (%)</th>
+								<th>Icon</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for skill in skills %}
+							<tr>
+								<td>{{ skill.name }}</td>
+								<td>{{ skill.category }}</td>
+								<td>{{ skill.proficiency }}%</td>
+								<td><i class="{{ skill.icon }}"></i></td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</div>
+	</div>
+</body>
+
+</html>
