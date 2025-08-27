@@ -365,6 +365,9 @@ def admin_login():
     return render_template("login.html")
 
 
+
+
+
 @app.route("/admin/logout")
 def admin_logout():
     session.pop("user_id", None)
